@@ -114,7 +114,7 @@ INSERT INTO WORKS_ON VALUES(17,108,6);
 .............................................................................................................................................................................................................................................................
 .............................................................................................
                                                                                                        .......................................................................................................
-
+--1
 (SELECT P.PNO FROM PROJECT P, DEPARTMENT D, EMPLOYEE E
 WHERE P.DNO=D.DNO AND E.SSN=D.MGRSSN AND E.NAME='SCOTT')
 UNION
@@ -123,22 +123,26 @@ SELECT P1.PNO FROM PROJECT P1,WORKS_ON W, EMPLOYEE E1
 WHERE P1.PNO=W.PNO AND E1.SSN=W.SSN AND E1.NAME='SCOTT');
 
 
-
+--2
 SELECT E.NAME , 1.1*E.SALARY AS HIKE_SAL FROM PROJECT P , WORKS_ON W, EMPLOYEE E
 WHERE P.PNO=W.PNO AND E.SSN=W.SSN AND P.PNAME='IOT';
 
+--3            
+            
 SELECT MAX(E.SALARY) AS MAX_SAL, SUM(E.SALARY) AS SUM_SAL,
 MIN(E.SALARY) AS MIN_SAL , AVG(E.SALARY) AS AVG_SAL  FROM EMPLOYEE E , DEPARTMENT D
 WHERE E.DNO=D.DNO AND D.DNAME='ACCOUNTS';
 
-
+            
+            
+--4
 SELECT E.NAME FROM EMPLOYEE E  WHERE
 NOT EXISTS( (SELECT P.PNO FROM PROJECT P WHERE P.DNO=5) MINUS (SELECT W.PNO FROM WORKS_ON W WHERE 
 E.SSN=W.SSN));
 
 
 
-
+--5
  SELECT DNO , COUNT(*) AS NO_OF_EMP FROM EMPLOYEE
 WHERE Salary>600000 and dno in(
        select dno from employee group by(dno)
